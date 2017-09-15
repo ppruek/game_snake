@@ -1,5 +1,5 @@
 import arcade
- 
+from models import World,Snake
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 600
 
@@ -20,15 +20,18 @@ class ModelSprite(arcade.Sprite):
 class SnakeWindow(arcade.Window):
     def __init__(self, width, height):
         super().__init__(width, height)
-         
-        self.snake_sprite = arcade.Sprite('images/block.png')
-        self.snake_sprite.set_position(300,300)
-        
+ 
         arcade.set_background_color(arcade.color.BLACK)
-    
+        self.world = World(SCREEN_WIDTH, SCREEN_HEIGHT)
+        self.snake_sprite = ModelSprite('images/block.png',
+                                        model=self.world.snake)
+        self.snake_sprite.set_position(300,300)
+ 
+    def update(self, delta):
+        self.world.update(delta)
+ 
     def on_draw(self):
         arcade.start_render()
- 
         self.snake_sprite.draw()
 
 def main():
