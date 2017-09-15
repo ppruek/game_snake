@@ -16,7 +16,7 @@ class Snake:
         self.y = y
         self.wait_time = 0
         self.direction = DIR_RIGHT
- 
+
     def update(self, delta):
         self.wait_time += delta
         if self.wait_time < Snake.MOVE_WAIT:
@@ -31,9 +31,17 @@ class World:
     def __init__(self, width, height):
         self.width = width
         self.height = height
- 
         self.snake = Snake(self, width // 2, height // 2)
- 
- 
+    
+    def on_key_press(self, key, key_modifiers):
+        if key == arcade.key.UP:
+            self.snake.direction = DIR_UP
+        if key == arcade.key.DOWN:
+            self.snake.direction = DIR_DOWN
+        if key == arcade.key.LEFT:
+            self.snake.direction = DIR_LEFT 
+        if key == arcade.key.RIGHT:
+            self.snake.direction = DIR_RIGHT
+
     def update(self, delta):
         self.snake.update(delta)
