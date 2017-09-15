@@ -7,6 +7,7 @@ DIR_OFFSET = { DIR_UP: (0,1),
                DIR_RIGHT: (1,0),
                DIR_DOWN: (0,-1),
                DIR_LEFT: (-1,0) }
+
 class Snake:
     MOVE_WAIT = 0.2
     BLOCK_SIZE = 16
@@ -16,6 +17,10 @@ class Snake:
         self.y = y
         self.wait_time = 0
         self.direction = DIR_RIGHT
+        self.body = [(x,y),
+                     (x-Snake.BLOCK_SIZE, y),
+                     (x-2*Snake.BLOCK_SIZE, y)]
+        self.length = 3
 
     def update(self, delta):
         self.wait_time += delta
