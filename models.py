@@ -28,9 +28,12 @@ class Snake:
             return
         if self.x > self.world.width:
             self.x = 0
+
         self.x += DIR_OFFSET[self.direction][0]*Snake.BLOCK_SIZE
         self.y += DIR_OFFSET[self.direction][1]*Snake.BLOCK_SIZE
         self.wait_time = 0
+        self.body = [(self.x,self.y)] + self.body
+        self.body.pop()
  
 class World:
     def __init__(self, width, height):
